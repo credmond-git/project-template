@@ -19,4 +19,7 @@ dependencies {
     implementation("com.github.ben-manes:gradle-versions-plugin:0.33.0")
     implementation("com.palantir.gradle.gitversion:gradle-git-version:0.12.3")
     implementation("net.ltgt.gradle:gradle-errorprone-plugin:1.2.1")
+
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.10")
+    implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.15.0")
 }
