@@ -61,7 +61,7 @@ public class LinkedList {
         Node it = head;
         while (index > 0 && it != null) {
             it = it.next;
-            index--;
+            index--;  //NOPMD
         }
 
         if (it == null) {

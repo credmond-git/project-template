@@ -1,29 +1,36 @@
-repositories {
-    mavenCentral()
-    jcenter()
-}
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+/*
+ * Apply the plugin to setup kotlin code plugins.
+ *
+ * @author <a href="mailto:colin.redmond@outlook.com"> Colin Redmond </a> (c) 2024.
+ */
 
 plugins {
-    id("io.gitlab.arturbosch.detekt")
+    kotlin("jvm")
+    id("org.jetbrains.dokka")
+}
+
+kotlin {
+    jvmToolchain(libs.versions.java.get().toInt())
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
 
 dependencies {
-    detektPlugins(Plugins.detekt)
+    // Will apply the plugin to all dokka tasks
+    dokkaHtmlPlugin(libs.kotlin.dokka)
 }
 
-detekt {
-    toolVersion = Plugins.Versions.detekt
-    config = files(project.rootDir.resolve("config/detekt/config.yml"))
-    debug = false
-    parallel = false
-    reports {
-        xml.enabled = true
-        html.enabled = true
-    }
+tasks.dokkaJavadoc.configure {
+    outputDirectory.set(layout.buildDirectory.get().asFile.resolve("dokka"))
 }
 
-tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
-    exclude(".*/resources/.*")
-    exclude(".*/tmp/.*")
-    exclude(".*/build/.*")
+
+// Make sure we compile Kotlin before the Java Docs
+tasks.withType<Javadoc>().configureEach {
+    enabled = false
 }

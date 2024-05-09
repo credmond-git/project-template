@@ -1,11 +1,10 @@
 import net.ltgt.gradle.errorprone.errorprone
 
-// Add to all modules to apply multiple code quality plugins to your module.
-
-repositories {
-    mavenCentral()
-}
-
+/**
+ * Apply to all modules to include multiple code quality plugins to your module.
+ *
+ * @author <a href="mailto:colin.redmond@outlook.com"> Colin Redmond </a> (c) 2024.
+ */
 plugins {
     id("net.ltgt.errorprone")
     checkstyle
@@ -13,7 +12,7 @@ plugins {
 }
 
 dependencies {
-    errorprone(Plugins.errorProne)
+    errorprone(libs.errorProne)
 }
 
 tasks.withType<JavaCompile>().configureEach {
@@ -21,14 +20,12 @@ tasks.withType<JavaCompile>().configureEach {
 }
 
 checkstyle {
-    toolVersion = "8.36.2"
+    toolVersion = libs.versions.checkStyle.get()
     configFile = file(rootDir.path + "/config/checkstyle/google_checks.xml")
     isIgnoreFailures = true
 }
 
 pmd {
     isConsoleOutput = true
-    toolVersion = "6.21.0"
-    rulePriority = 5
     ruleSets = listOf(rootDir.path + "/config/pmd/custom_ruleset.xml")
 }

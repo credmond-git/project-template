@@ -5,21 +5,21 @@
 plugins {
     // Support convention plugins written in Kotlin. Convention plugins are build scripts in 'src/main' that automatically become available as plugins in the main build.
     `kotlin-dsl`
+    alias(libs.plugins.gradle.ben.manes.versions)
 }
 
-repositories {
-    // Use the plugin portal to apply community plugins in convention plugins.
-    gradlePluginPortal()
-
-    jcenter()
-    mavenCentral()
+kotlin {
+    jvmToolchain(libs.versions.java.get().toInt())
 }
 
 dependencies {
-    implementation("com.github.ben-manes:gradle-versions-plugin:0.33.0")
-    implementation("com.palantir.gradle.gitversion:gradle-git-version:0.12.3")
-    implementation("net.ltgt.gradle:gradle-errorprone-plugin:1.2.1")
+    implementation(libs.gradle.ben.manes.versions)
+    implementation(libs.gradle.versions.update)
+    implementation(libs.gradle.git.versions)
+    implementation(libs.gradle.error.prone)
 
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.10")
-    implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.15.0")
+    implementation(libs.gradle.kotlin)
+    implementation(libs.gradle.dokka)
+    implementation(libs.gradle.detekt)
+    implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
