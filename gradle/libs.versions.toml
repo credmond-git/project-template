@@ -46,7 +46,5 @@ gradle-ben-manes-versions = { module = "com.github.ben-manes:gradle-versions-plu
 gradle-versions-update = { module = "nl.littlerobots.vcu:plugin", version.ref = "gradleVersionsUpdate" }
 gradle-error-prone = { module = "net.ltgt.gradle:gradle-errorprone-plugin", version.ref = "gradleErrorProne" }
 
-[bundles]
-
 [plugins]
 gradle-ben-manes-versions = { id = "com.github.ben-manes.versions", version.ref = "gradleVersions" }
